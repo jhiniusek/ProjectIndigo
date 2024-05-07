@@ -21,8 +21,11 @@ public class DealerService {
     }
 
     public List<Dealer> readDealers(){
-        List<Dealer> dealers = dealerRepository.findAll();
-        return dealers;
+        return dealerRepository.findAll();
+    }
+
+    public Dealer readDealer(String name){
+        return dealerRepository.findDealerByName(name);
     }
 
     public Dealer createDealer(String dealerName){
@@ -37,6 +40,7 @@ public class DealerService {
     public Dealer updateDealer(Integer id, String name){
         Optional<Dealer> dealer = dealerRepository.findById(id);
         dealer.get().setDescription(name);
+        dealer.get().setAmendDate(LocalDateTime.now());
         dealerRepository.save(dealer.get());
         return dealer.get();
     }

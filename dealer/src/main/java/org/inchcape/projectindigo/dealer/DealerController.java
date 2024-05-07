@@ -29,6 +29,11 @@ public class DealerController {
         return dealerService.readDealers();
     }
 
+    @GetMapping("/{name}")
+    public Dealer readDealer(@PathVariable("name") String name){
+        return dealerService.readDealer(name);
+    }
+
     @PutMapping
     public Dealer updateDealer(@RequestParam Integer id, @RequestParam String dealerName){
         return dealerService.updateDealer(id, dealerName);
