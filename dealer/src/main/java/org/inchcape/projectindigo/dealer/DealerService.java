@@ -2,7 +2,9 @@ package org.inchcape.projectindigo.dealer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,7 +27,13 @@ public class DealerService {
     }
 
     public Dealer readDealer(String name){
-        return dealerRepository.findDealerByName(name);
+        if(dealerRepository.findDealerByName(name)!=null){
+            return dealerRepository.findDealerByName(name);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Dealer not found"
+            );
+        }
     }
 
     public Dealer createDealer(String dealerName){
