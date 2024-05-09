@@ -21,13 +21,7 @@ public class DealerService {
     }
 
     public Dealer readDealer(String name) {
-        if (dealerRepository.findDealerByName(name) != null) {
-            return dealerRepository.findDealerByName(name);
-        } else {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Dealer not found"
-            );
-        }
+        return dealerRepository.findDealerByName(name);
     }
 
     public Dealer createDealer(String dealerName) {
